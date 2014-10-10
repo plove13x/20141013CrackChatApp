@@ -55,6 +55,10 @@ h1 {
     margin: 0;
 }
 
+.mainTitle {
+    text-align: center;
+}
+
 img {
     vertical-align: top;
 }
@@ -71,8 +75,6 @@ aside {
     vertical-align: top;
 }
 
-
-
 .nonAvatar {
     display: inline-block;
 }
@@ -88,4 +90,7 @@ h5 {
     vertical-align: top;
 }
 
+.active {
+    font-weight: bold;
+}
 

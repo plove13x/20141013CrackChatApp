@@ -7,39 +7,59 @@
   </head>
   <body>
 
+<!-- data-template-name="application" -->
+
+
+<script type="text/x-handlebars">
+<h1 class="mainTitle">CRACK ROCKS! [OR NOTHING?]</h1>
+{{outlet}}
+</script>
+
+
+<script type="text/x-handlebars" data-template-name="login">
+{{input type="text" class="username" placeholder="UserName"}}
+{{input type="text" class="email" placeholder="E-mail"}}
+<button {{action "logIn"}}>Log In</button>
+</script>
+
+
+<script type="text/x-handlebars" data-template-name="rooms" id="rooms">
 <aside>
   <h1>Crack</h1>
   <h4>Rock Out...</h4>
   <h2>Rooms</h2>
   <ul>
-    <li>General Room</li>
-    <li>JS Room</li>
+  {{#each}}
+
+    <li>
+    {{#link-to 'room.chats' this}}
+    {{roomName}}
+    {{/link-to}}
+    </li>
+
+  {{/each}}
   </ul>
   User Info?
 </aside>
+
+{{outlet}}
+</script>
+
+<!--        {{#link-to 'chat' this}} 
+    {{/link-to}}
+
+-->
+
+
+<script type="text/x-handlebars" data-template-name="room">
+
 <div class="chatLog">
-  <h1>(Room Name) (Room Description)</h1>
-  <ul>
-    <li>
-      <img src="http://placekitten.com/g/40/50" />
-      <div class="nonAvatar">
-      <h5>User Name</h5>
-      <span>Timestamp</span>
-      <p>(Chat Message)</p>
-      </div>
-    </li>
-    <li>
-      <img src="http://placekitten.com/g/40/50" />
-      <div class="nonAvatar">
-      <h5>User Name</h5>
-      <span>Timestamp</span>
-      <p>(Chat Message)</p>
-      </div>
-    </li>
-  </ul>
+  <h1>{{roomName}}</h1>
+  {{outlet}}
   <label>+</label>
   <input type="text" placeholder="(ENTER MESSAGE HERE)" size="80">
 </div>
+
 <div class="searchArea">
   <input type="search">
   <p> (SEARCH CATEGORY FILTERS) </p>
@@ -48,55 +68,82 @@
     <li>(Result 2)</li>
   </ul>
 </div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="room/chats">
+  <ul>
+    {{#each}}
+    <li>
+    <img src="http://placekitten.com/g/40/50" />
+    <div class="nonAvatar">
+    <h5>{{username}}</h5>
+    <span>Timestamp</span>
+    <p>{{message}}</p>
+    </div>
+    </li>
+    {{/each}}
+
+
+    <li>
+      <img src="http://placekitten.com/g/40/50" />
+      <div class="nonAvatar">
+      <h5>User Name</h5>
+      <span>Timestamp</span>
+      <p>(Chat Message)</p>
+      </div>
+    </li>
+
+  </ul>
+</script>
 
 
     <script type="text/x-handlebars" data-template-name="todos">
 
-        // <section id="todoapp">
-        //   <header id="header">
-        //     <h1>todos</h1>
-        //     {{input type="text" id="new-todo" placeholder="What needs to be done?" 
-        //       value=newTitle action="createTodo"}}
-        //   </header>
+        <section id="todoapp">
+          <header id="header">
+            <h1>todos</h1>
+            {{input type="text" id="new-todo" placeholder="What needs to be done?" 
+              value=newTitle action="createTodo"}}
+          </header>
 
-        //   <section id="main">
-        //     <ul id="todo-list">
-        //       {{#each}}
-        //           <li {{bind-attr class="isCompleted:completed"}}>
-        //             <input type="checkbox" class="toggle">
-        //             <label>{{title}}</label><button class="destroy"></button>
-        //           </li>
-        //       {{/each}}
-        //     </ul>
+          <section id="main">
+            <ul id="todo-list">
+              {{#each}}
+                  <li {{bind-attr class="isCompleted:completed"}}>
+                    <input type="checkbox" class="toggle">
+                    <label>{{title}}</label><button class="destroy"></button>
+                  </li>
+              {{/each}}
+            </ul>
 
-        //     <input type="checkbox" id="toggle-all">
-        //   </section>
+            <input type="checkbox" id="toggle-all">
+          </section>
 
-        //   <footer id="footer">
-        //     <span id="todo-count">
-        //       <strong>2</strong> todos left
-        //     </span>
-        //     <ul id="filters">
-        //       <li>
-        //         <a href="all" class="selected">All</a>
-        //       </li>
-        //       <li>
-        //         <a href="active">Active</a>
-        //       </li>
-        //       <li>
-        //         <a href="completed">Completed</a>
-        //       </li>
-        //     </ul>
+          <footer id="footer">
+            <span id="todo-count">
+              <strong>2</strong> todos left
+            </span>
+            <ul id="filters">
+              <li>
+                <a href="all" class="selected">All</a>
+              </li>
+              <li>
+                <a href="active">Active</a>
+              </li>
+              <li>
+                <a href="completed">Completed</a>
+              </li>
+            </ul>
 
-        //     <button id="clear-completed">
-        //       Clear completed (1)
-        //     </button>
-        //   </footer>
-        // </section>
+            <button id="clear-completed">
+              Clear completed (1)
+            </button>
+          </footer>
+        </section>
 
-        // <footer id="info">
-        //   <p>Double-click to edit a todo</p>
-        // </footer>
+        <footer id="info">
+          <p>Double-click to edit a todo</p>
+        </footer>
 
     </script>
 
@@ -108,9 +155,9 @@
         <script src="bower_components/jquery/jquery.js"></script>
         <script src="bower_components/modernizr/modernizr.js"></script>
         <script src="bower_components/handlebars/handlebars.js"></script>
-        <script src="bower_components/handlebars/handlebars.runtime.js"></script>
         <script src="bower_components/ember/ember.js"></script>
         <script src="bower_components/ember-data/ember-data.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -119,7 +166,7 @@
         <!-- build:js scripts/main.js -->
         <script src="js/application.js"></script>
         <script src="js/router.js"></script>
-        <script src="js/models/todo.js"></script>
+        <script src="js/models/message.js"></script>
         <!-- endbuild -->
 </body>
 </html>
